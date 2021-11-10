@@ -67,8 +67,8 @@ export default function Header() {
 
   return (
     <Box sx={{ flexGrow: 1 }}>
-      <AppBar position="static">
-        <Container>
+      <AppBar position="sticky" color='' elevation={0} >
+        <Container sx={{px:0}}>
         <Toolbar>
           <Typography
             variant="h6"
@@ -93,10 +93,9 @@ export default function Header() {
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button variant='text' color='inherit'>Dashboard</Button>
-            <Button 
-            variant='contained'
-            color='secondary'
-            >login</Button>
+            <button 
+             className='my-btn-dark'
+            >login</button>
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton
