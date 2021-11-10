@@ -11,6 +11,7 @@ const useStyle=makeStyles({
         backgroundImage:`url(${bennerImg})`,
         backgroundPosition:'center',
         backgroundSize:'cover',
+        backgroundAttachment:'fixed'
     },
     benner_text:{
         display:'flex',

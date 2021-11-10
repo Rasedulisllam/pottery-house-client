@@ -2,7 +2,7 @@
   /* text-align: center; */
 }
 
-.my-btn-dark{
+.my-btn-outline-dark{
   border:1px solid black;
   background-color: transparent;
   letter-spacing: 1px;
@@ -14,7 +14,7 @@
   cursor:pointer;
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.144);
 }
-.my-btn-dark:hover{
+.my-btn-outline-dark:hover{
   background-color: black;
   color:white;
   box-shadow: 1px 1px 20px rgba(0, 0, 0, 0.294);
