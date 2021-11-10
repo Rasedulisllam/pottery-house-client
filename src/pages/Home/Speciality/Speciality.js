@@ -31,25 +31,25 @@ const Speciality = () => {
                 <Grid container spacing={3}>
                     <Grid item sm={6} md={3}>
                        <Box  className={classes.spaciality_item}>
-                       <BiSupport size={50} className={classes.spaciality_icon}></BiSupport> 
+                       <BiSupport size={50} color="#e57373" className={classes.spaciality_icon}></BiSupport> 
                        <Typography variant='h5'>24/7 support</Typography>
                        </Box>
                     </Grid>
                     <Grid item sm={6} md={3}>
                        <Box  className={classes.spaciality_item}>
-                       <MdLocalShipping size={50} className={classes.spaciality_icon}></MdLocalShipping> 
+                       <MdLocalShipping size={50} color="#e57373" className={classes.spaciality_icon}></MdLocalShipping> 
                        <Typography variant='h5'>Quick Shipping</Typography>
                        </Box>
                     </Grid>
                     <Grid item sm={6} md={3}>
                        <Box  className={classes.spaciality_item}>
-                       <RiSecurePaymentFill size={50} className={classes.spaciality_icon}></RiSecurePaymentFill> 
+                       <RiSecurePaymentFill size={50} color="#e57373" className={classes.spaciality_icon}></RiSecurePaymentFill> 
                        <Typography variant='h6'>Secure payment</Typography>
                        </Box>
                     </Grid>
                     <Grid item sm={6} md={3}>
                        <Box  className={classes.spaciality_item}>
-                       <FaPercent size={50} className={classes.spaciality_icon}></FaPercent> 
+                       <FaPercent size={50} color="#e57373" className={classes.spaciality_icon}></FaPercent> 
                        <Typography variant='h5'>special offers</Typography>
                        </Box>
                     </Grid>

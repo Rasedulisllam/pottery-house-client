@@ -34,7 +34,7 @@ const Blogs = () => {
             img:'https://i.ibb.co/9pwhzPc/bl-img1.jpg'
         },
         {
-            key:1,
+            key:3,
             title:'Only the best ways to sculpt pottery',
             details:'Pottery is made up of ceramic materials and encompasses major types of pottery wares such as earthenware, stoneware and porcelain. To be considered pottery, a piece must be a fired ceramic ware that contains clay when formed To create a piece of pottery, the potter must form a ceramic clay body into a specific object, whether by hand built or wheel thrown techniques, and then heat it at a high temperature in a kiln to remove water from the clay. This allows for changes in the molded object, increasing its strength and durability while permanently setting its shape.',
             date:'October 1, 2021',
