@@ -1,10 +1,13 @@
 import { Container, Grid, Rating, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Footer from '../../Sheared/Footer/Footer';
 import Header from '../../Sheared/Header/Header';
 import { useForm } from "react-hook-form";
+import { useHistory, useParams } from 'react-router';
+import axios from 'axios';
+import useAuth from '../../../hooks/useAuth';
 
 const useStyle=makeStyles({
     product_header:{
@@ -19,23 +22,37 @@ const useStyle=makeStyles({
 })
 
 const PurchaseProduct = () => {
+    const history = useHistory()
+    const {user} = useAuth()
     const classes=useStyle()
-
-    const data={
-        key:1,
-        name:'Flower Pot',
-        img:'https://i.ibb.co/t3BqzbX/flower-Pot.jpg',
-        shortDetails:'White with colourful designs.',
-        details:'We all love our Home, but for outdoors and having the flowers that you need can sometimes be a drag. This problem is solved with the Flowers. Boasting in 3 separate designs, this Pots can transport anything from flower to Flatware or even your favorite bottled beverage',
-        price:19,
-        rating:4,
-    }
+    const {id}=useParams()
+    const [product,setProduct]=useState({rating:0})
+    
+    // getting single product data depands on product id
+    useEffect(()=>{
+        const url=`http://localhost:5000/products/${id}`
+        axios.get(url)
+            .then(res => {
+                setProduct(res.data)
+            })
+    },[id])
 
     const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
-  
-        
+    const onSubmit = data => {
+        data.productName=product.name;
+        data.ProductImg=product.img;
+        data.price=product.price;
+        data.status='painding'
+        axios.post('http://localhost:5000/orderProducts',data)
+            .then(res =>{
+                if(res.data.insertedId){
+                    alert('Order place successfully')
+                    history.push('/exploreProducts')
+                }
+            })
+    };
     
+    // console.log(product)
     return (
         <Box>
             <Header></Header>
@@ -48,16 +65,16 @@ const PurchaseProduct = () => {
                 <Container>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={6}>
-                        <img src={data.img} width='100%' alt="product img" />
+                        <img src={product?.img} width='100%' alt="product img" />
                         <Typography variant='h6'sx={{my:3}}>Description</Typography>
-                        <Typography variant='body2' color='text.disabled'>{data.details}</Typography>
+                        <Typography variant='body2' color='text.disabled'>{product?.details}</Typography>
                     </Grid>
                     <Grid item xs={12} md={6}>
                         <Box sx={{ml:3}}>
-                            <Typography variant='h3'sx={{}}>{data.name}</Typography>
-                            <Typography variant='body2' color='text.disabled'>{data.shortDetails}</Typography>
-                            <Typography variant='h5'sx={{my:2,fontWeight:'bold'}}>${data.price}</Typography>
-                            <Rating name="read-only" value={data.rating} readOnly />
+                            <Typography variant='h3'sx={{}}>{product?.name}</Typography>
+                            <Typography variant='body2' color='text.disabled'>{product?.shortDetails}</Typography>
+                            <Typography variant='h5'sx={{my:2,fontWeight:'bold'}}>${product?.price}</Typography>
+                            <Rating name="read-only" value={product?.rating} readOnly />
                         </Box>
                         <Box sx={{ml:3, p:4}} className={classes.order_form} >
                              <Typography variant='h5' sx={{textTransform:'uppercase',mb:2}}>Order Form</Typography>
@@ -69,7 +86,7 @@ const PurchaseProduct = () => {
                                     id="name-basic" 
                                     label="Name" 
                                     variant="outlined"
-                                    defaultValue="name"
+                                    defaultValue={user.displayName}
                                     {...register("name")}
                                     />
                                 </Box>
@@ -81,7 +98,7 @@ const PurchaseProduct = () => {
                                     label="Eamil" 
                                     type='email'
                                     variant="outlined"
-                                    defaultValue="email"
+                                    defaultValue={user.email}
                                     {...register("email")}
                                     />
                                 </Box>

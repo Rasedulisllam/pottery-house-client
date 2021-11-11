@@ -29,12 +29,12 @@ const useStyle = makeStyles({
 
 const Product = (props) => {
     const history = useHistory()
-    const {name, img, shortDetails, price, rating}=props.product;
+    const {name, img, shortDetails, price, rating,_id}=props.product;
     const classes=useStyle()
 
     // handle buy now button click
     const handleBuyNowButton =()=>{
-        history.push(`/purchaseProduct/${1}`)
+        history.push(`/purchaseProduct/${_id}`)
     }
 
     return (

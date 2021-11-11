@@ -1,7 +1,9 @@
 import { Container, Grid, ListItem, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
+import { useHistory } from 'react-router';
 import author from '../../../images/blog/Author.png'
 import Blog from '../Blog/Blog';
 
@@ -16,40 +18,20 @@ const useStyle=makeStyles({
 
 const Blogs = () => {
     const classes=useStyle();
-    const data= [
-        {
-            key:1,
-            title:'Ceramics courses that will elevate',
-            details:'Consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam quis in exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.” Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in repreh. enderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est.',
-            date:'October 10, 2021',
-            author:'Yui Elizabeth',
-            img:'https://i.ibb.co/mtyd1dk/bl-img2.jpg'
-        },
-        {
-            key:2,
-            title:'Do a deep dive into the pots and pans',
-            details:'Due to the Coronavirus pandemic, for most people, the last year was the most amount of time they have ever spent inside. For others, it was the year with the most amount of takeout ordered or the most amount of TV watched. While some people have discovered a new appreciation for cooking or baking while being stuck at home, others are itching to go back to safe and comfortable restaurant dining. As we reflect on the way food habits have changed in the last year, it is compelling to look at how food habits have changed throughout history.',
-            date:'October 7, 2021',
-            author:'Yui Elizabeth',
-            img:'https://i.ibb.co/9pwhzPc/bl-img1.jpg'
-        },
-        {
-            key:3,
-            title:'Only the best ways to sculpt pottery',
-            details:'Pottery is made up of ceramic materials and encompasses major types of pottery wares such as earthenware, stoneware and porcelain. To be considered pottery, a piece must be a fired ceramic ware that contains clay when formed To create a piece of pottery, the potter must form a ceramic clay body into a specific object, whether by hand built or wheel thrown techniques, and then heat it at a high temperature in a kiln to remove water from the clay. This allows for changes in the molded object, increasing its strength and durability while permanently setting its shape.',
-            date:'October 1, 2021',
-            author:'Yui Elizabeth',
-            img:'https://i.ibb.co/3pt1Htg/bl-img3.jpg'
-        },
-        {
-            key:4,
-            title:'100 working days in a workshop',
-            details:'Workshops aren’t like regular online courses or webinars which are largely passive, single-player experiences. They’re not like traditional education; sitting still obediently, listening to an expert who’s been put up on a pedestal.Instead, workshops are about connecting with others, applying ideas, and trying things out. They’re about developing and improving work, and learning every step of the way. And they offer a degree of interactivity, generosity, and shared experience that’s hard to match.',
-            date:'September 26, 2021',
-            author:'Yui Elizabeth',
-            img:'https://i.ibb.co/mJH4z78/bl-img4.jpg'
-        },
-    ]
+    const [blogs,setBlogs] =useState([])
+    const history = useHistory()
+
+    // getting some products data from database
+    useEffect(()=>{
+        const url=`http://localhost:5000/blogs?count=2`
+        axios.get(url)
+            .then(res =>{
+                setBlogs(res.data)
+            })
+    },[])
+
+    console.log(blogs)
+    
 
     return (
         <Container sx={{my:6}}>
@@ -59,7 +41,7 @@ const Blogs = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={8}>
                         {
-                            data.map(blog => <Blog key={blog.key} blog={blog}></Blog>)
+                            blogs.map(blog => <Blog key={blog.key} blog={blog}></Blog>)
                         }
                     </Grid>
                     <Grid item xs={12} md={4}>
@@ -88,8 +70,14 @@ const Blogs = () => {
                     </Grid>
                 </Grid> 
             </Box>
+            <button 
+            onClick={()=> history.push('/blogs')}
+            className='my-btn-outline-dark' 
+            style={{my:3, margin:'2rem auto', display:'block',}}
+            >More Blogs</button>
         </Container>
     );
 };
 
 export default Blogs;
+

@@ -1,7 +1,8 @@
 import { Container, Typography,Grid, TextField, Button } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import React from 'react';
+import axios from 'axios';
+import React, { useEffect, useState } from 'react';
 import Product from '../../Sheared/Product/Product';
 
 
@@ -15,29 +16,18 @@ const useStyle=makeStyles({
 
 const AllProducts = () => {
     const classes=useStyle()
+    const [products,setProducts] =useState([])
 
-    const data=[
-        {
-            key:1,
-            name:'Flower Pot',
-            img:'https://i.ibb.co/t3BqzbX/flower-Pot.jpg',
-            shortDetails:'White with colourful designs.',
-            details:'We all love our Home, but for outdoors and having the flowers that you need can sometimes be a drag. This problem is solved with the Flowers. Boasting in 3 separate designs, this Pots can transport anything from flower to Flatware or even your favorite bottled beverage',
-            price:19,
-            rating:4,
-        },
-        {
-            key:2,
-            name:'Clay Bowl',
-            img:'https://i.ibb.co/K2mLYWM/clayBowl.jpg',
-            shortDetails:'Can be used for office or kitchen storage',
-            details:'DIY clay bowls take just minutes to make and decorate, which means you can create a bunch and keep them on hand. Paired with simple add-ons like incense, jewelry, candles, or plants they make thoughtful gifts with a sweet, personal touch. Follow these simple directions to make two different kinds of bowls.',
-            price:20,
-            rating:4,
-        },
-    ]
+    // getting all products data from database
+    useEffect(()=>{
+        const url=`http://localhost:5000/products`
+        axios.get(url)
+            .then(res =>{
+                setProducts(res.data)
+            })
+    },[])
 
-
+    // console.log(products)
     return (
         <Box>
             <Box className={classes.product_header}>
@@ -48,11 +38,11 @@ const AllProducts = () => {
             <Container>
                 <Grid container spacing={2} sx={{my:3}}>
                     <Grid item xs={12} md={9}>
-                        <Typography variant='body1' sx={{mb:2}}>Showing {0} results</Typography>
+                        <Typography variant='body1' sx={{mb:2}}>Showing {products.length} results</Typography>
                         <Box>
                             <Grid container spacing={{ xs: 3, md: 6 }} columns={{ xs: 4, sm: 8, md:8 }}>
                                 {
-                                    data.map(product => <Product key={product.key} product={product}></Product>)
+                                    products.map(product => <Product key={product.key} product={product}></Product>)
                                 }
                             </Grid>
                         </Box>

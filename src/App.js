@@ -13,6 +13,7 @@ import Login from './pages/Login/Login/Login';
 import AuthProvider from './Context/AuthProvider';
 import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
+import AllBlogs from './pages/Home/AllBlogs/AllBlogs'
 
 function App() {
   return (
@@ -25,6 +26,9 @@ function App() {
                 </Route>
                 <Route path="/home">
                   <Home></Home>
+                </Route>
+                <Route path="/blogs">
+                  <AllBlogs></AllBlogs>
                 </Route>
                 <Route path="/exploreProducts">
                   <ExploreAllProducts></ExploreAllProducts>
