@@ -6,6 +6,10 @@ import {
   Route,
 } from "react-router-dom";
 import Home from './pages/Home/Home/Home';
+import ExploreAllProducts from './pages/ExploreAllProducts/ExploreAllProducts/ExploreAllProducts';
+import PurchaseProduct from './pages/ExploreAllProducts/PurchaseProduct/PurchaseProduct';
+import Register from './pages/Login/Register/Register';
+import Login from './pages/Login/Login/Login';
 
 function App() {
   return (
@@ -17,6 +21,18 @@ function App() {
           </Route>
           <Route path="/home">
             <Home></Home>
+          </Route>
+          <Route path="/exploreProducts">
+            <ExploreAllProducts></ExploreAllProducts>
+          </Route>
+          <Route path="/purchaseProduct/:id">
+            <PurchaseProduct></PurchaseProduct>
+          </Route>
+          <Route path="/login">
+            <Login></Login>
+          </Route>
+          <Route path="/register">
+            <Register></Register>
           </Route>
           <Route path="*">
             

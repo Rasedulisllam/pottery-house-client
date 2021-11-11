@@ -7,6 +7,7 @@ import CardMedia from '@mui/material/CardMedia';
 import Typography from '@mui/material/Typography';
 import { Box } from '@mui/system';
 import { makeStyles } from '@mui/styles';
+import { useHistory } from 'react-router';
 
 const useStyle = makeStyles({
     product_main:{
@@ -27,10 +28,17 @@ const useStyle = makeStyles({
 })
 
 const Product = (props) => {
+    const history = useHistory()
     const {name, img, shortDetails, price, rating}=props.product;
     const classes=useStyle()
+
+    // handle buy now button click
+    const handleBuyNowButton =()=>{
+        history.push(`/purchaseProduct/${1}`)
+    }
+
     return (
-       <Grid item  xs={12} md={4}>
+       <Grid item xs={4} sm={4} md={4}>
              <Card sx={{height:'100%'}} className={classes.product_main} elevation={0} >
                 <CardMedia
                     component="img"
@@ -53,7 +61,10 @@ const Product = (props) => {
                 </CardContent>
                 <CardActions className={classes.product_action}>
                    <Rating name="read-only" value={rating} readOnly />
-                   <button className="my-btn-outline-dark">buy now</button>
+                   <button 
+                   onClick={handleBuyNowButton}
+                   className="my-btn-outline-dark"
+                   >buy now</button>
                 </CardActions>
             </Card>
        </Grid>

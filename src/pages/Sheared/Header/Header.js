@@ -66,7 +66,7 @@ export default function Header() {
   );
 
   return (
-    <Box sx={{ flexGrow: 1 }}>
+    <Box sx={{ flexGrow: 1, position:'sticky' }} >
       <AppBar position="sticky" color='' elevation={0} >
         <Container sx={{px:0}}>
         <Toolbar>
@@ -83,17 +83,19 @@ export default function Header() {
             <Button 
             onClick={()=> history.push('/home')}
             variant='text' 
-            color='inherit'>home</Button>
+            color='inherit'>Home</Button>
             <Button 
+            onClick={()=> history.push('/exploreProducts')}
             variant='text'
             color='inherit'
-            >Explor</Button>
+            >All Products</Button>
           </Box>
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
             <Button variant='text' color='inherit'>Dashboard</Button>
             <button 
+            onClick={()=> history.push('/login')}
              className='my-btn-dark'
             >login</button>
           </Box>

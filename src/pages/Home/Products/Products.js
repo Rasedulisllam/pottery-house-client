@@ -1,9 +1,11 @@
 import { Container, Grid, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
+import { useHistory } from 'react-router';
 import Product from '../../Sheared/Product/Product';
 
 const Products = () => {
+    const history= useHistory()
     const data=[
         {
             key:1,
@@ -125,17 +127,22 @@ const Products = () => {
     ]
     return (
         <Container sx={{my:6}}>
-            <Box sx={{textAlign:'center', mb:5}}>
+            <Box sx={{textAlign:'center', mb:8}}>
                 <Typography variant='body1' sx={{fontStyle:'italic'}}>Latest products</Typography>
                 <Typography variant='h3' sx={{ textTransform:'uppercase'}}>Perfect decor prices for daily life</Typography>
             </Box>
             <Box>
-                <Grid container spacing={4}>
+                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
                     {
                         data.map(product => <Product key={product.key} product={product}></Product>)
                     }
                 </Grid>
             </Box>
+            <button 
+            onClick={()=> history.push('/exploreProducts')}
+            className='my-btn-outline-dark' 
+            style={{my:3, margin:'2rem auto', display:'block',}}
+            >Explore all Products</button>
         </Container>
     );
 };
