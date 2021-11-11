@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link,useHistory } from 'react-router-dom';
 import useAuth from '../../../hooks/useAuth';
 import loginImg from '../../../images/login/login1.jpg'
 
@@ -28,6 +28,7 @@ const useStyle=makeStyles({
 })
 
 const Register = () => {
+    const history = useHistory()
     const classes=useStyle()
     const {user,createUser}=useAuth()
     const {
@@ -41,7 +42,7 @@ const Register = () => {
             alert('Password not match')
             return
         }
-        createUser(data.email, data.password, data.name)
+        createUser(data.email, data.password, data.name, history)
     };
 
     console.log(user)

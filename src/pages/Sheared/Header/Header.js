@@ -10,6 +10,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Button, Container } from '@mui/material';
 import { useHistory } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
+import { FiLogOut } from 'react-icons/fi';
 
 
 
@@ -104,6 +105,7 @@ export default function Header() {
               user.email?(
                   <Box>
                   <Button 
+                  onClick={()=>history.push('/dashboard')}
                   variant='text'
                   color='inherit'
                   sx={{mr:2}}
@@ -112,7 +114,8 @@ export default function Header() {
                   <button 
                   onClick={handleLogout}
                   className='my-btn-dark'
-                  >logout</button>
+                  >logout <FiLogOut/>
+                  </button>
                 </Box>
               ):(
                 <button 

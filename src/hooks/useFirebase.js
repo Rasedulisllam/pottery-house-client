@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import InitializeFirebase from '../Firebase/Firebase.init';
-import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,updateProfile } from "firebase/auth";
 
 
 InitializeFirebase()
@@ -11,15 +11,30 @@ const useFirebase = () => {
     const [isLoading, setIsLoading]=useState(true)
     const auth = getAuth();
 
+    // update user name
+    const updateName=(user,name)=>{
+          updateProfile(auth.currentUser, {
+            displayName:name
+          }).then(() => {
+                const newUser= {...user}
+                newUser.displayName=name;
+                setUser(newUser)
+          }).catch((error) => {
+                setErr(error.message)
+          });
+    }
 
     // create user with email and password
-    const createUser=(email,password,name='')=>{
+    const createUser=(email,password,name='',history)=>{
         setIsLoading(true)
         createUserWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
             setUser(user)
+            updateName(user,name)
             setErr('')
+            alert('Account create successfully')
+            history.replace('/')
         })
         .catch((error) => {
             const errorMessage = error.message;
@@ -29,13 +44,16 @@ const useFirebase = () => {
     }
 
     // login with email and password
-    const login=(email,password)=>{
+    const login=(email,password,location,history)=>{
         setIsLoading(true)
+        const redirect_uri= location?.state?.from || '/home'
+
         signInWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
                     setUser(user)
                     setErr('')
+                    history.push(redirect_uri)
                 })
                 .catch((error) => {
                     const errorMessage = error.message;

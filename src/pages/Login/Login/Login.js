@@ -3,7 +3,7 @@ import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
-import { Link } from 'react-router-dom';
+import { Link,useLocation,useHistory } from 'react-router-dom';
 import loginImg from '../../../images/login/login1.jpg'
 import useAuth from '../../../hooks/useAuth'
 
@@ -30,6 +30,8 @@ const useStyle=makeStyles({
 const Login = () => {
     const {login}=useAuth()
     const classes=useStyle()
+    const location=useLocation()
+    const history=useHistory()
     const {
         register,
         handleSubmit,
@@ -37,7 +39,7 @@ const Login = () => {
     } = useForm();
 
     const onSubmit = (data) => {
-        login(data.email, data.password)
+        login(data.email, data.password, location, history)
     };
 
   return (

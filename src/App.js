@@ -11,6 +11,8 @@ import PurchaseProduct from './pages/ExploreAllProducts/PurchaseProduct/Purchase
 import Register from './pages/Login/Register/Register';
 import Login from './pages/Login/Login/Login';
 import AuthProvider from './Context/AuthProvider';
+import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
+import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
 
 function App() {
   return (
@@ -27,9 +29,12 @@ function App() {
                 <Route path="/exploreProducts">
                   <ExploreAllProducts></ExploreAllProducts>
                 </Route>
-                <Route path="/purchaseProduct/:id">
+                <PrivateRoute path="/purchaseProduct/:id">
                   <PurchaseProduct></PurchaseProduct>
-                </Route>
+                </PrivateRoute>
+                <PrivateRoute path="/dashboard">
+                  <Dashboard></Dashboard>
+                </PrivateRoute>
                 <Route path="/login">
                   <Login></Login>
                 </Route>
