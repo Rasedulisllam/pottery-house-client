@@ -5,6 +5,7 @@ import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
 import loginImg from '../../../images/login/login1.jpg'
+import useAuth from '../../../hooks/useAuth'
 
 const useStyle=makeStyles({
     login_main:{
@@ -27,6 +28,7 @@ const useStyle=makeStyles({
 })
 
 const Login = () => {
+    const {login}=useAuth()
     const classes=useStyle()
     const {
         register,
@@ -34,7 +36,9 @@ const Login = () => {
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+        login(data.email, data.password)
+    };
 
   return (
     <Box className={classes.login_main}>

@@ -9,10 +9,12 @@ import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Button, Container } from '@mui/material';
 import { useHistory } from 'react-router';
+import useAuth from '../../../hooks/useAuth';
 
 
 
 export default function Header() {
+  const {user,logout}=useAuth()
   const history = useHistory();
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = React.useState(null);
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
@@ -28,6 +30,11 @@ export default function Header() {
   const handleMobileMenuOpen = (event) => {
     setMobileMoreAnchorEl(event.currentTarget);
   };
+
+  // handle logout system
+  const handleLogout=()=>{
+    logout()
+  }
 
 
   const mobileMenuId = 'primary-search-account-menu-mobile';
@@ -93,11 +100,27 @@ export default function Header() {
 
           <Box sx={{ flexGrow: 1 }} />
           <Box sx={{ display: { xs: 'none', md: 'flex' } }}>
-            <Button variant='text' color='inherit'>Dashboard</Button>
-            <button 
-            onClick={()=> history.push('/login')}
-             className='my-btn-dark'
-            >login</button>
+            {
+              user.email?(
+                  <Box>
+                  <Button 
+                  variant='text'
+                  color='inherit'
+                  sx={{mr:2}}
+                  >Dashboard</Button>
+
+                  <button 
+                  onClick={handleLogout}
+                  className='my-btn-dark'
+                  >logout</button>
+                </Box>
+              ):(
+                <button 
+                onClick={()=> history.push('/login')}
+                 className='my-btn-outline-dark'
+                >login</button>
+              )
+            }
           </Box>
           <Box sx={{ display: { xs: 'flex', md: 'none' } }}>
             <IconButton

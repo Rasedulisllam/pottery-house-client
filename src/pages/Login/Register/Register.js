@@ -4,6 +4,7 @@ import { Box } from '@mui/system';
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { Link } from 'react-router-dom';
+import useAuth from '../../../hooks/useAuth';
 import loginImg from '../../../images/login/login1.jpg'
 
 const useStyle=makeStyles({
@@ -28,13 +29,22 @@ const useStyle=makeStyles({
 
 const Register = () => {
     const classes=useStyle()
+    const {user,createUser}=useAuth()
     const {
         register,
         handleSubmit,
         formState: { errors },
     } = useForm();
 
-    const onSubmit = (data) => console.log(data);
+    const onSubmit = (data) => {
+        if(data.password !== data.RePassword){
+            alert('Password not match')
+            return
+        }
+        createUser(data.email, data.password, data.name)
+    };
+
+    console.log(user)
 
   return (
     <Box className={classes.login_main}>
