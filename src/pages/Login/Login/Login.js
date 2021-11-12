@@ -1,4 +1,4 @@
-import {  Container, Grid, TextField, Typography } from '@mui/material';
+import {  Alert, Container, Grid, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import React from 'react';
@@ -28,7 +28,7 @@ const useStyle=makeStyles({
 })
 
 const Login = () => {
-    const {login}=useAuth()
+    const {login,err}=useAuth()
     const classes=useStyle()
     const location=useLocation()
     const history=useHistory()
@@ -111,6 +111,9 @@ const Login = () => {
                         >
                             <Link to='/register'>Create an account</Link>
                         </Typography>
+                        {err && <Alert 
+                        severity="error"
+                        >{err}</Alert>}
                     </Box>
                 </Grid>
             </Grid>

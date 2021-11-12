@@ -1,4 +1,4 @@
-import {  Container, Grid, TextField, Typography } from '@mui/material';
+import {  Alert, Container, Grid, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
 import React from 'react';
@@ -30,7 +30,7 @@ const useStyle=makeStyles({
 const Register = () => {
     const history = useHistory()
     const classes=useStyle()
-    const {createUser}=useAuth()
+    const {createUser,err}=useAuth()
     const {
         register,
         handleSubmit,
@@ -148,6 +148,9 @@ const Register = () => {
                         >
                             <Link to='/login'>Already have an account?</Link>
                         </Typography>
+                        {err && <Alert 
+                        severity="error"
+                        >{err}</Alert>}
                     </Box>
                 </Grid>
             </Grid>

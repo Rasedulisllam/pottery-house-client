@@ -10,6 +10,7 @@ const useFirebase = () => {
     const [user,setUser]=useState({});
     const [err,setErr]=useState('');
     const [isLoading, setIsLoading]=useState(true)
+    const [adminLoading, setAdminLoading]=useState(true)
     const [isAdmin, setIsAdmin]=useState(false)
     const auth = getAuth();
 
@@ -28,10 +29,12 @@ const useFirebase = () => {
 
     // check user Role Admin or not
     useEffect(()=>{
+        setAdminLoading(true)
         const url=`http://localhost:5000/users?email=${user.email}`
         axios.get(url)
             .then(res =>{
                 setIsAdmin(res.data)
+                setAdminLoading(false)
             })
     },[user])
 
@@ -123,6 +126,7 @@ const useFirebase = () => {
         isAdmin,
         err,
         isLoading,
+        adminLoading,
         createUser,
         login,
         logout,

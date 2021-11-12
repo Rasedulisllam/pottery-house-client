@@ -5,10 +5,10 @@ import { Redirect, Route } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 
 const AdminRoute = ({children, ...rest}) => {
-    const {user,isLoading,isAdmin}=useAuth();
+    const {user,isLoading,isAdmin,adminLoading}=useAuth();
 
     // wait for observeimg user
-    if(isLoading){
+    if(isLoading && adminLoading){
         return <Box sx={{display:'flex',justifyContent:'center', height:'100vh', alignItems:"center"}}>
             <CircularProgress color="inherit" />
         </Box>

@@ -51,7 +51,7 @@ const Blogs = () => {
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={8}>
                         {
-                            blogs.map(blog => <Blog key={blog.key} blog={blog}></Blog>)
+                            blogs.map(blog => <Blog key={blog._id} blog={blog}></Blog>)
                         }
                     </Grid>
                     <Grid item xs={12} md={4}>

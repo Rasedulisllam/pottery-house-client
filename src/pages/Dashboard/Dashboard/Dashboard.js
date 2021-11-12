@@ -32,6 +32,8 @@ import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
 import AddProduct from '../AddProduct/AddProduct';
 import MakeAdmin from '../MakeAdmin/MakeAdmin';
 import AdminRoute from '../AdminRoute/AdminRoute';
+import ManageProducts from '../ManageProducts/ManageProducts';
+import ManageProductDetails from '../ManageProductDetails/ManageProductDetails';
 
 const drawerWidth = 240;
 
@@ -64,7 +66,7 @@ function Dashboards(props) {
         logout()
     }
 
-    console.log(isAdmin)
+    // console.log(isAdmin)
     const drawer = (
         <div>
         <Toolbar />
@@ -276,7 +278,10 @@ function Dashboards(props) {
                     <MakeAdmin></MakeAdmin>
                 </AdminRoute>
                 <AdminRoute path={`${path}/manageProducts`}>
-                    <Payment></Payment>
+                    <ManageProducts  url={url}></ManageProducts>
+                </AdminRoute>
+                <AdminRoute path={`${path}/manageProductDetails/:id`}>
+                    <ManageProductDetails></ManageProductDetails>
                 </AdminRoute>
             </Switch>
       </Box>

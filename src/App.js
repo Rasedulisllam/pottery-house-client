@@ -14,6 +14,8 @@ import AuthProvider from './Context/AuthProvider';
 import PrivateRoute from './pages/PrivateRoute/PrivateRoute';
 import Dashboard from './pages/Dashboard/Dashboard/Dashboard';
 import AllBlogs from './pages/Home/AllBlogs/AllBlogs'
+import NotFound from './pages/NotFound/NotFound'
+
 
 function App() {
   return (
@@ -46,7 +48,7 @@ function App() {
                   <Register></Register>
                 </Route>
                 <Route path="*">
-                  
+                  <NotFound></NotFound>
                 </Route>
               </Switch>
           </Router>

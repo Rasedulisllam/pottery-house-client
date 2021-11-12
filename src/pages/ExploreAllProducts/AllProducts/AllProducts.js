@@ -42,7 +42,7 @@ const AllProducts = () => {
                         <Box>
                             <Grid container spacing={{ xs: 3, md: 6 }} columns={{ xs: 4, sm: 8, md:8 }}>
                                 {
-                                    products.map(product => <Product key={product.key} product={product}></Product>)
+                                    products.map(product => <Product key={product._id} product={product}></Product>)
                                 }
                             </Grid>
                         </Box>
