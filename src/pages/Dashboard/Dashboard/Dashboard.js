@@ -30,6 +30,8 @@ import UserReview from '../UserReview/UserReview';
 import Payment from '../Payment/Payment';
 import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
 import AddProduct from '../AddProduct/AddProduct';
+import MakeAdmin from '../MakeAdmin/MakeAdmin';
+import AdminRoute from '../AdminRoute/AdminRoute';
 
 const drawerWidth = 240;
 
@@ -51,7 +53,7 @@ function Dashboards(props) {
     const { window } = props;
     const [mobileOpen, setMobileOpen] = React.useState(false);
     const classes =useStyle()
-    const {logout}=useAuth()
+    const {isAdmin,logout}=useAuth()
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
@@ -62,54 +64,56 @@ function Dashboards(props) {
         logout()
     }
 
+    console.log(isAdmin)
     const drawer = (
         <div>
         <Toolbar />
         <Divider />
-        <List>
-            <NavLink 
-            to={`${url}/myOrder`}
-            className={classes.navlink}
-            activeClassName={classes.Navlink_active}
-            >
-                <ListItem button>
-                    <ListItemIcon>
-                    <GrUnorderedList />
-                    </ListItemIcon>
-                    <ListItemText>
-                        My Order
-                    </ListItemText>
-                </ListItem>
-            </NavLink>
-            <NavLink 
-            to={`${url}/reviews`}
-            className={classes.navlink}
-            activeClassName={classes.Navlink_active}
-            >
-                <ListItem button>
-                    <ListItemIcon>
-                    <MdOutlineRateReview />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Reviews
-                    </ListItemText>
-                </ListItem>
-            </NavLink>
-            <NavLink 
-            to={`${url}/payment`}
-            className={classes.navlink}
-            activeClassName={classes.Navlink_active}
-            >
-                <ListItem button>
-                    <ListItemIcon>
-                    <MdPayment />
-                    </ListItemIcon>
-                    <ListItemText>
-                        Payment
-                    </ListItemText>
-                </ListItem>
-            </NavLink>
-        </List>
+        {
+          !isAdmin?(<List>
+                <NavLink 
+                to={`${url}/myOrder`}
+                className={classes.navlink}
+                activeClassName={classes.Navlink_active}
+                >
+                    <ListItem button>
+                        <ListItemIcon>
+                        <GrUnorderedList />
+                        </ListItemIcon>
+                        <ListItemText>
+                            My Order
+                        </ListItemText>
+                    </ListItem>
+                </NavLink>
+                <NavLink 
+                to={`${url}/reviews`}
+                className={classes.navlink}
+                activeClassName={classes.Navlink_active}
+                >
+                    <ListItem button>
+                        <ListItemIcon>
+                        <MdOutlineRateReview />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Reviews
+                        </ListItemText>
+                    </ListItem>
+                </NavLink>
+                <NavLink 
+                to={`${url}/payment`}
+                className={classes.navlink}
+                activeClassName={classes.Navlink_active}
+                >
+                    <ListItem button>
+                        <ListItemIcon>
+                        <MdPayment />
+                        </ListItemIcon>
+                        <ListItemText>
+                            Payment
+                        </ListItemText>
+                    </ListItem>
+                </NavLink>
+            </List>):(
         <List>
             <NavLink 
             to={`${url}/manageAllOrders`}
@@ -168,6 +172,7 @@ function Dashboards(props) {
                 </ListItem>
             </NavLink>
         </List>
+            )}
         <button
         onClick={()=>history.push('/home')}
         className='my-btn-white' 
@@ -261,18 +266,18 @@ function Dashboards(props) {
                 <Route path={`${path}/payment`}>
                     <Payment></Payment>
                 </Route>
-                <Route path={`${path}/manageAllOrders`}>
+                <AdminRoute path={`${path}/manageAllOrders`}>
                     <ManageAllOrders></ManageAllOrders>
-                </Route>
-                <Route path={`${path}/addProduct`}>
+                </AdminRoute>
+                <AdminRoute path={`${path}/addProduct`}>
                     <AddProduct></AddProduct>
-                </Route>
-                <Route path={`${path}/makeAdmin`}>
+                </AdminRoute>
+                <AdminRoute path={`${path}/makeAdmin`}>
+                    <MakeAdmin></MakeAdmin>
+                </AdminRoute>
+                <AdminRoute path={`${path}/manageProducts`}>
                     <Payment></Payment>
-                </Route>
-                <Route path={`${path}/manageProducts`}>
-                    <Payment></Payment>
-                </Route>
+                </AdminRoute>
             </Switch>
       </Box>
     </Box>

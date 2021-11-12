@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import InitializeFirebase from '../Firebase/Firebase.init';
 import { getAuth, createUserWithEmailAndPassword,signInWithEmailAndPassword,signOut,onAuthStateChanged,updateProfile } from "firebase/auth";
+import axios from 'axios';
 
 
 InitializeFirebase()
@@ -9,6 +10,7 @@ const useFirebase = () => {
     const [user,setUser]=useState({});
     const [err,setErr]=useState('');
     const [isLoading, setIsLoading]=useState(true)
+    const [isAdmin, setIsAdmin]=useState(false)
     const auth = getAuth();
 
     // update user name
@@ -24,6 +26,30 @@ const useFirebase = () => {
           });
     }
 
+    // check user Role Admin or not
+    useEffect(()=>{
+        const url=`http://localhost:5000/users?email=${user.email}`
+        axios.get(url)
+            .then(res =>{
+                setIsAdmin(res.data)
+            })
+    },[user])
+
+
+    // create user on database
+    const createUserOnDb=(name,email)=>{
+        const data={
+            name,
+            email,
+        }
+        // console.log(data)
+        const url=`http://localhost:5000/users`
+        axios.post(url,data)
+            .then(res =>{
+               
+            })
+    }
+
     // create user with email and password
     const createUser=(email,password,name='',history)=>{
         setIsLoading(true)
@@ -35,6 +61,7 @@ const useFirebase = () => {
             setErr('')
             alert('Account create successfully')
             history.replace('/')
+            createUserOnDb(name,email)
         })
         .catch((error) => {
             const errorMessage = error.message;
@@ -93,6 +120,7 @@ const useFirebase = () => {
     // console.log(err)
     return {
         user,
+        isAdmin,
         err,
         isLoading,
         createUser,

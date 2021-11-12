@@ -1,14 +1,12 @@
 
-import { Container, FormControl, Grid, InputLabel, MenuItem, Rating, Select, TextField, Typography } from '@mui/material';
+import { FormControl, InputLabel, MenuItem, Select, TextField, Typography } from '@mui/material';
 import { makeStyles } from '@mui/styles';
 import { Box } from '@mui/system';
-import React, { useEffect, useState } from 'react';
-import Footer from '../../Sheared/Footer/Footer';
-import Header from '../../Sheared/Header/Header';
+
 import { useForm } from "react-hook-form";
-import { useHistory, useParams } from 'react-router';
+
 import axios from 'axios';
-import useAuth from '../../../hooks/useAuth';
+
 
 const useStyle=makeStyles({
     product_header:{

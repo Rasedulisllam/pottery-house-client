@@ -30,7 +30,7 @@ const useStyle=makeStyles({
 const Register = () => {
     const history = useHistory()
     const classes=useStyle()
-    const {user,createUser}=useAuth()
+    const {createUser}=useAuth()
     const {
         register,
         handleSubmit,
@@ -45,7 +45,7 @@ const Register = () => {
         createUser(data.email, data.password, data.name, history)
     };
 
-    console.log(user)
+    // console.log(user)
 
   return (
     <Box className={classes.login_main}>
