@@ -18,7 +18,7 @@ const Products = () => {
             })
     },[])
 
-    // console.log(products)
+    console.log(products)
     
     return (
         <Container sx={{my:6}}>
