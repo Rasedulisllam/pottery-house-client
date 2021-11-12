@@ -20,8 +20,8 @@ const useStyle=makeStyles({
 })
 
 const Reviews = (props) => {
-    const {name, comment, img, rating}=props.review;
-
+    const {name, message, img, rating}=props.review;
+    
     const classes= useStyle();
 
     return (
@@ -29,7 +29,7 @@ const Reviews = (props) => {
             <Paper elevation={0} sx={{p:3, bgcolor:'#ffebee'}}>
                 <Box>
                     <ImQuotesLeft size={40} color="#e57373"></ImQuotesLeft>
-                    <Typography variant='body1' color='text.disabled' sx={{my:1}}> {comment}</Typography>
+                    <Typography variant='body1' color='text.disabled' sx={{my:1}}> {message}</Typography>
                 </Box>
                 <Box className={classes.review_identy}>
                     <Box className={classes.review_images}>

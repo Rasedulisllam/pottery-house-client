@@ -6,21 +6,21 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
-import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
 import { Button, Typography } from '@mui/material';
+import useAuth from '../../../hooks/useAuth';
 
 
-export default function MyOrders() {
+export default function ManageAllOrders() {
   const {user}=useAuth()
-  const [myOrders,setMyOrders]=React.useState([])
+  const [allOrders,setAllOrders]=React.useState([])
 
-  // load my orders product data from data base
+  // load All orders product data from data base
   React.useEffect(()=>{
-    const url=`http://localhost:5000/orderProducts?email=${user.email}`
+    const url=`http://localhost:5000/orderProducts`
     axios.get(url)
       .then(res => {
-         setMyOrders(res.data)
+         setAllOrders(res.data)
       })
   },[user.email])
 
@@ -34,29 +34,50 @@ export default function MyOrders() {
               .then(res => {
                 if(res.data.deletedCount>0){
                   alert('Delete order successfully')
-                  const filterdOrders=myOrders.filter(order=> order._id !== id)
-                  setMyOrders(filterdOrders)
+                  const filterdOrders=allOrders.filter(order=> order._id !== id)
+                  setAllOrders(filterdOrders)
                 }
               })
      }
   }
 
+    //  handle approved button
+    const handleAproved=(id)=>{
+        const url=`http://localhost:5000/orderProducts/${id}`
+        axios.put(url)
+            .then(res => {
+              if(res.data.modifiedCount>0){
+                alert('Order Approved')
+                const updatedOrders= allOrders.filter(order => {
+                    if(order._id===id){
+                        order.status='approved'
+                    }
+                    return order;
+                })
+                setAllOrders(updatedOrders)
+              }
+            })
+    }  
 
-  // console.log(myOrders)
+
+//   console.log(allOrders)
   return (
-    <TableContainer component={Paper} sx={{m:3, maxWidth:'95%'}}>
+    <TableContainer component={Paper} sx={{m:2, maxWidth:'98%'}}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Product Image</TableCell>
-            <TableCell align="right">Product Name</TableCell>
-            <TableCell align="right">Price</TableCell>
+            <TableCell align="left">Product Name</TableCell>
+            <TableCell align="left">Product Price</TableCell>
+            <TableCell align="left">User Email</TableCell>
+            <TableCell align="left">User Name</TableCell>
+            <TableCell align="left">Phone Number</TableCell>
             <TableCell align="right">Status</TableCell>
             <TableCell align="right">Action</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
-          {myOrders.map((row) => (
+          {allOrders.map((row) => (
             <TableRow
               key={row._id}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
@@ -64,17 +85,20 @@ export default function MyOrders() {
               <TableCell component="th" scope="row">
                <img src={row.ProductImg} height='60px' alt="" />
               </TableCell>
-              <TableCell align="right">{row.productName}</TableCell>
-              <TableCell align="right">{row.price} $</TableCell>
+              <TableCell align="left">{row.productName}</TableCell>
+              <TableCell align="left">{row.price} $</TableCell>
+              <TableCell align="left"  sx={{color:'info.main'}}>{row.email}</TableCell>
+              <TableCell align="left">{row.name}</TableCell>
+              <TableCell align="left">{row.number}</TableCell>
               <TableCell align="right">
-                {row.status==='painding'? <Typography 
-                variant='body1' 
-                sx={{color:'warning.main'}}
-                >Pending</Typography>:<Typography 
+                {row.status==='painding'? <Button 
+                onClick={()=>handleAproved(row._id)}
+                variant='contained' 
+                color='info'
+                >aprove</Button>:<Typography 
                 variant='body1' 
                 sx={{color:'success.main', fontWeight:'bold'}}
-                >Shipping
-                </Typography>}
+                >Shipping</Typography>}
                 </TableCell>
               <TableCell align="right">
                 <Button 

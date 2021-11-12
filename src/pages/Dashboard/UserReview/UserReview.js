@@ -8,6 +8,7 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import useAuth from '../../../hooks/useAuth';
+import axios from 'axios';
 
 const useStyle=makeStyles({
     product_header:{
@@ -25,8 +26,17 @@ const UserReview = () => {
     const {user}=useAuth()
     const classes=useStyle()
 
-    const { register, handleSubmit, formState: { errors } } = useForm();
-    const onSubmit = data => console.log(data);
+    const { register, handleSubmit,reset, formState: { errors } } = useForm();
+    const onSubmit = data => {
+        const url=`http://localhost:5000/reviews`
+        axios.post(url,data)
+            .then(res =>{
+                if(res.data.insertedId){
+                    alert('successfully give a review!')
+                    reset()
+                }
+            })
+    };
 
     return (
         <Box sx={{ml:3, p:4}} className={classes.order_form} >

@@ -17,14 +17,18 @@ import { useHistory, useRouteMatch } from 'react-router';
 import { NavLink,Switch,Route } from 'react-router-dom';
 import { makeStyles } from '@mui/styles';
 import {GrUnorderedList} from 'react-icons/gr'
+import {GrUserAdmin} from 'react-icons/gr'
 import {MdOutlineRateReview} from 'react-icons/md'
 import {MdPayment} from 'react-icons/md'
+import {MdOutlineManageSearch} from 'react-icons/md'
 import {FiLogOut} from 'react-icons/fi'
 import {AiOutlineHome} from 'react-icons/ai'
+import {AiOutlineFileAdd} from 'react-icons/ai'
 import useAuth from '../../../hooks/useAuth'
 import MyOrders from '../MyOrders/MyOrders';
 import UserReview from '../UserReview/UserReview';
 import Payment from '../Payment/Payment';
+import ManageAllOrders from '../ManageAllOrders/ManageAllOrders';
 
 const drawerWidth = 240;
 
@@ -101,6 +105,64 @@ function Dashboards(props) {
                     </ListItemIcon>
                     <ListItemText>
                         Payment
+                    </ListItemText>
+                </ListItem>
+            </NavLink>
+        </List>
+        <List>
+            <NavLink 
+            to={`${url}/manageAllOrders`}
+            className={classes.navlink}
+            activeClassName={classes.Navlink_active}
+            >
+                <ListItem button>
+                    <ListItemIcon>
+                    <GrUnorderedList />
+                    </ListItemIcon>
+                    <ListItemText>
+                       Manage All Orders
+                    </ListItemText>
+                </ListItem>
+            </NavLink>
+            <NavLink 
+            to={`${url}/addProduct`}
+            className={classes.navlink}
+            activeClassName={classes.Navlink_active}
+            >
+                <ListItem button>
+                    <ListItemIcon>
+                    <AiOutlineFileAdd />
+                    </ListItemIcon>
+                    <ListItemText>
+                    Add Product
+                    </ListItemText>
+                </ListItem>
+            </NavLink>
+            <NavLink 
+            to={`${url}/makeAdmin`}
+            className={classes.navlink}
+            activeClassName={classes.Navlink_active}
+            >
+                <ListItem button>
+                    <ListItemIcon>
+                    <GrUserAdmin />
+                    </ListItemIcon>
+                    <ListItemText>
+                        Make Admin
+                    </ListItemText>
+                </ListItem>
+            </NavLink>
+            <NavLink 
+            to={`${url}/manageProducts`}
+            className={classes.navlink}
+            activeClassName={classes.Navlink_active}
+            >
+                <ListItem button>
+                    <ListItemIcon>
+                    <MdOutlineManageSearch />
+                    </ListItemIcon>
+                    <ListItemText>
+                       Manage Products
                     </ListItemText>
                 </ListItem>
             </NavLink>
@@ -196,6 +258,18 @@ function Dashboards(props) {
                     <UserReview></UserReview>
                 </Route>
                 <Route path={`${path}/payment`}>
+                    <Payment></Payment>
+                </Route>
+                <Route path={`${path}/manageAllOrders`}>
+                    <ManageAllOrders></ManageAllOrders>
+                </Route>
+                <Route path={`${path}/addProduct`}>
+                    <Payment></Payment>
+                </Route>
+                <Route path={`${path}/makeAdmin`}>
+                    <Payment></Payment>
+                </Route>
+                <Route path={`${path}/manageProducts`}>
                     <Payment></Payment>
                 </Route>
             </Switch>

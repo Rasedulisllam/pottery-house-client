@@ -30,7 +30,7 @@ const Blogs = () => {
             })
     },[])
 
-    console.log(blogs)
+    // console.log(blogs)
     
 
     return (
