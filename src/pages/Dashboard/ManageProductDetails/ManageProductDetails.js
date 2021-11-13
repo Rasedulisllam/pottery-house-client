@@ -26,7 +26,7 @@ const ManageProductDetails = () => {
     
     // getting single product data depands on product id
     useEffect(()=>{
-        const url=`http://localhost:5000/products/${id}`
+        const url=`https://serene-brushlands-06959.herokuapp.com/products/${id}`
         axios.get(url)
             .then(res => {
                 setProduct(res.data)
@@ -44,7 +44,7 @@ const ManageProductDetails = () => {
         
         const isUpdate = window.confirm('Click ok for confire UPDATE')
         if(isUpdate){
-            const url=`http://localhost:5000/products`
+            const url=`https://serene-brushlands-06959.herokuapp.com/products`
             axios.put(url,updateProduct)
                 .then(res =>{
                     if(res.data.matchedCount>0){

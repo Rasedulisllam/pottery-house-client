@@ -30,7 +30,7 @@ const useFirebase = () => {
     // check user Role Admin or not
     useEffect(()=>{
         setAdminLoading(true)
-        const url=`http://localhost:5000/users?email=${user.email}`
+        const url=`https://serene-brushlands-06959.herokuapp.com/users?email=${user.email}`
         axios.get(url)
             .then(res =>{
                 setIsAdmin(res.data)
@@ -46,7 +46,7 @@ const useFirebase = () => {
             email,
         }
         // console.log(data)
-        const url=`http://localhost:5000/users`
+        const url=`https://serene-brushlands-06959.herokuapp.com/users`
         axios.post(url,data)
             .then(res =>{
                

@@ -35,7 +35,7 @@ import AdminRoute from '../AdminRoute/AdminRoute';
 import ManageProducts from '../ManageProducts/ManageProducts';
 import ManageProductDetails from '../ManageProductDetails/ManageProductDetails';
 
-const drawerWidth = 240;
+const drawerWidth = 200;
 
 const useStyle=makeStyles({
     navlink:{
@@ -199,8 +199,8 @@ function Dashboards(props) {
         elevation={0}
         position="fixed"
         sx={{
-          width: { sm: `calc(100% - ${drawerWidth}px)` },
-          ml: { sm: `${drawerWidth}px` },
+          width: { md: `calc(100% - ${drawerWidth}px)` },
+          ml: { md: `${drawerWidth}px` },
         }}
       >
         <Toolbar>
@@ -209,9 +209,9 @@ function Dashboards(props) {
             aria-label="open drawer"
             edge="start"
             onClick={handleDrawerToggle}
-            sx={{ mr: 2, display: { sm: 'none' } }}
+            sx={{ mr: 2, display: { md: 'none' }}}
           >
-            <MenuIcon />
+          <MenuIcon />
           </IconButton>
             <Typography variant="h6" noWrap component="div">
               Pottery House Dashboard
@@ -220,7 +220,7 @@ function Dashboards(props) {
       </AppBar>
       <Box
         component="nav"
-        sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+        sx={{ width: { md: drawerWidth }, flexShrink: { sm: 0 } }}
         aria-label="mailbox folders"
       >
         {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -233,7 +233,7 @@ function Dashboards(props) {
             keepMounted: true, // Better open performance on mobile.
           }}
           sx={{
-            display: { xs: 'block', sm: 'none' },
+            display: { sx: 'block', md: 'none' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
         >
@@ -242,7 +242,7 @@ function Dashboards(props) {
         <Drawer
           variant="permanent"
           sx={{
-            display: { xs: 'none', sm: 'block' },
+            display: { xs: 'none', md: 'block' },
             '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
           }}
           open
@@ -252,7 +252,7 @@ function Dashboards(props) {
       </Box>
       <Box
         component="main"
-        sx={{ flexGrow: 1, p:2, width: { sm: `calc(100% - ${drawerWidth}px)` } }}
+        sx={{ flexGrow: 1, p:2, width: {xs:'100%', md: `calc(100% - ${drawerWidth}px)` } }}
       >
         <Toolbar />
             <Switch>

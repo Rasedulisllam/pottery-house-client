@@ -9,7 +9,7 @@ const Testimonials = () => {
     
     // load all reviews data on database
     useEffect(()=>{
-        const url=`http://localhost:5000/reviews`
+        const url=`https://serene-brushlands-06959.herokuapp.com/reviews`
         axios.get(url)
             .then(res =>{
                 setReviews(res.data)
@@ -17,11 +17,18 @@ const Testimonials = () => {
     },[])
     return (
         <Container>
-            <Typography variant='h3' sx={{fontWeight:400, textAlign:'center', textTransform:'uppercase'}}>Testimonials</Typography>
+            <Typography 
+            variant='h3' 
+            sx={{fontWeight:400, textAlign:'center', textTransform:'uppercase',fontSize:{xs:'2rem',sm:'2.5rem', md:'3rem'}}}
+            >Testimonials
+            </Typography>
             <Box sx={{my:8}}>
                 <Grid container spacing={2}>
                    {
-                       reviews.map(review => <Reviews key={review._id} review={review}></Reviews>)
+                       reviews.map(review => <Reviews 
+                        key={review._id} 
+                        review={review}
+                        ></Reviews>)
                    }
                 </Grid>
             </Box>

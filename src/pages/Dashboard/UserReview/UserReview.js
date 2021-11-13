@@ -10,15 +10,30 @@ import Select from '@mui/material/Select';
 import useAuth from '../../../hooks/useAuth';
 import axios from 'axios';
 
-const useStyle=makeStyles({
-    product_header:{
-        padding:'3rem 0',
-        backgroundColor:'#ffebee',
-        textTransform:'uppercase'
-    },
-    order_form:{
-        width:'50%',
-        margin:'1rem',
+const useStyle=makeStyles(theme =>{
+    return {
+        product_header:{
+            padding:'3rem 0',
+            backgroundColor:'#ffebee',
+            textTransform:'uppercase'
+        },
+        order_form:{
+            width:'50%',
+            margin:'1rem',
+            [theme.breakpoints.down('md')]:{
+                width:'70%',
+                
+            },
+            [theme.breakpoints.down('sm')]:{
+                width:'100%',
+                margin:'1rem auto'
+
+            },
+            [theme.breakpoints.down('xs')]:{
+                width:'100%',
+                margin:'1rem auto'
+            }
+        }
     }
 })
 
@@ -28,7 +43,7 @@ const UserReview = () => {
 
     const { register, handleSubmit,reset, formState: { errors } } = useForm();
     const onSubmit = data => {
-        const url=`http://localhost:5000/reviews`
+        const url=`https://serene-brushlands-06959.herokuapp.com/reviews`
         axios.post(url,data)
             .then(res =>{
                 if(res.data.insertedId){

@@ -39,7 +39,10 @@ const Product = (props) => {
 
     return (
        <Grid item xs={4} sm={4} md={4}>
-             <Card sx={{height:'100%'}} className={classes.product_main} elevation={0} >
+             <Card 
+             sx={{height:'100%'}} 
+             className={classes.product_main} 
+             elevation={0} >
                 <CardMedia
                     component="img"
                     alt="green iguana"
@@ -48,19 +51,32 @@ const Product = (props) => {
                 />
                 <CardContent sx={{}}>
                     <Box className={classes.product_text}>
-                        <Typography gutterBottom variant="h5" component="div" sx={{width:'75%'}}>
+                        <Typography 
+                        gutterBottom 
+                        variant="h5" 
+                        component="div" 
+                        sx={{width:'75%'}}>
                         {name}
                         </Typography>
-                        <Typography variant="h4" color="" sx={{fontWeight:'bold'}}>
+                        <Typography 
+                        variant="h4" 
+                        color="" 
+                        sx={{fontWeight:'bold', fontSize:{xs:'1.5rem',sm:'1.8rem',md:'2rem'}}}>
                         {price} $
                         </Typography>
                     </Box>
-                    <Typography variant="body2" color="text.secondary" sx={{width:'75%'}}>
+                    <Typography 
+                    variant="body2" 
+                    color="text.secondary" 
+                    sx={{width:'75%'}}>
                     {shortDetails}
                     </Typography>
                 </CardContent>
                 <CardActions className={classes.product_action}>
-                   <Rating name="read-only" value={rating} readOnly />
+                   <Rating 
+                   name="read-only" 
+                   value={rating} 
+                   readOnly />
                    <button 
                    onClick={handleBuyNowButton}
                    className="my-btn-outline-dark"

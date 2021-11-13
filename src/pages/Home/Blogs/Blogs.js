@@ -7,12 +7,18 @@ import { useHistory } from 'react-router';
 import author from '../../../images/blog/Author.png'
 import Blog from '../Blog/Blog';
 
-const useStyle=makeStyles({
-    blog_author_img:{
-        overflow:'hidden',
-        borderRadius:'50%',
-        width:'280px',
-        height:'280px'
+const useStyle=makeStyles(theme =>{
+    return{
+        blog_author_img:{
+            overflow:'hidden',
+            borderRadius:'50%',
+            width:'280px',
+            height:'280px',
+            [theme.breakpoints.down('sm')]:{
+                width:'250px',
+                height:'250px',
+            }
+        }
     }
 })
 
@@ -23,7 +29,7 @@ const Blogs = () => {
 
     // getting some products data from database
     useEffect(()=>{
-        const url=`http://localhost:5000/blogs?count=2`
+        const url=`https://serene-brushlands-06959.herokuapp.com/blogs?count=2`
         axios.get(url)
             .then(res =>{
                 setBlogs(res.data)
@@ -34,14 +40,21 @@ const Blogs = () => {
     
 
     return (
-        <Container sx={{my:6}}>
-            <Typography variant='h3' sx={{textTransform:'uppercase',textAlign:'center',mb:6}}>Our Blogs</Typography>
+        <Container sx={{my:10}}>
+            <Typography 
+            variant='h3' 
+            sx={{textTransform:'uppercase',textAlign:'center',my:6,fontSize:{xs:'2rem',sm:'2.5rem', md:'3rem'}}}
+            >Our Blogs
+            </Typography>
 
             <Box>
                 <Grid container spacing={2}>
                     <Grid item xs={12} md={8}>
                         {
-                            blogs.map(blog => <Blog key={blog._id} blog={blog}></Blog>)
+                            blogs.map(blog => <Blog 
+                                key={blog._id} 
+                                blog={blog}
+                                ></Blog>)
                         }
                     </Grid>
                     <Grid item xs={12} md={4}>
@@ -49,8 +62,15 @@ const Blogs = () => {
                             <img src={author} alt="author" />
                         </Box>
                         <Box sx={{p:2, my:2}}>
-                            <Typography variant='h6' sx={{mb:1}}>Yui Elizabeth</Typography>
-                            <Typography variant='body2'>Pottery is made up of ceramic materials and encompasses major types of pottery wares such as earthenware, stoneware and porcelain.</Typography>
+                            <Typography 
+                            variant='h6' 
+                            sx={{mb:1}}
+                            >Yui Elizabeth
+                            </Typography>
+                            <Typography 
+                            variant='body2'
+                            >Pottery is made up of ceramic materials and encompasses major types of pottery wares such as earthenware, stoneware and porcelain.
+                            </Typography>
                         </Box>
                         <Box sx={{p:2, my:2}}>
                             <Typography variant='h6'>Categories</Typography>

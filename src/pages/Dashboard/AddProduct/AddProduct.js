@@ -8,16 +8,32 @@ import { useForm } from "react-hook-form";
 import axios from 'axios';
 
 
-const useStyle=makeStyles({
-    product_header:{
-        padding:'3rem 0',
-        backgroundColor:'#ffebee',
-        textTransform:'uppercase'
-    },
-    order_form:{
-        width:'70%',
-        marginTop:'1.5rem',
-        boxShadow:'1px 1px 10px #ddd'
+const useStyle=makeStyles(theme =>{
+    return {
+        product_header:{
+            padding:'3rem 0',
+            backgroundColor:'#ffebee',
+            textTransform:'uppercase'
+        },
+        order_form:{
+            width:'70%',
+            marginTop:'1.5rem',
+            boxShadow:'1px 1px 10px #ddd',
+            [theme.breakpoints.down('md')]:{
+                width:'70%',
+                margin:'1.5rem auto'
+                
+            },
+            [theme.breakpoints.down('sm')]:{
+                width:'100%',
+                margin:'1rem auto'
+    
+            },
+            [theme.breakpoints.down('xs')]:{
+                width:'100%',
+                margin:'1rem auto'
+            }
+        }
     }
 })
 
@@ -29,7 +45,7 @@ const AddProduct = () => {
         const isAdd=window.confirm('Click Confirm to add product')
         data.price=parseFloat(data.price)
         if(isAdd){
-            axios.post('http://localhost:5000/Products',data)
+            axios.post('https://serene-brushlands-06959.herokuapp.com/Products',data)
             .then(res =>{
                 if(res.data.insertedId){
                     alert('Successfully Add product')
@@ -42,7 +58,12 @@ const AddProduct = () => {
 
     return (
         <Box sx={{m:2, p:4}} className={classes.order_form} >
-            <Typography variant='h5' sx={{textTransform:'uppercase',mb:3,}} align='center'>Add a New Product</Typography>
+            <Typography 
+            variant='h5' 
+            sx={{textTransform:'uppercase',mb:3,}} 
+            align='center'
+            >Add a New Product
+            </Typography>
             <form onSubmit={handleSubmit(onSubmit)}>
             <Box sx={{my:2}}>
                 <TextField 

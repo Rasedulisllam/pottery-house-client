@@ -9,41 +9,58 @@ import {AiFillTwitterCircle} from 'react-icons/ai'
 import {AiFillDribbbleCircle} from 'react-icons/ai'
 import {AiFillGithub} from 'react-icons/ai'
 import footerBenner from '../../../images/benner/footer_benner.jpg'
+import brand from '../../../images/logo/logo2.png'
 
-const useStyle=makeStyles({
-    footer_main:{
-        padding:'4rem 0',
-        background:`url(${footerBenner})`,
-        backgroundSize:'cover',
-        backgroundPosition:'center',
-        backgroundColor:'#424242',
-        backgroundBlendMode:'darken, luminosity',
-        color:'white'
-    },
-    footer_categories_item:{
-        display:'block',
-        textAlign:'center',
-        color:'#bdbdbd',
-        transition:'.3s',
-        '&:hover':{
-            color:'#f44336',
-        }
-    },
-    footer_mail_phone:{
-        display:'flex',  
-        marginTop:'.8rem'
-    },
-    footer_bottom:{
-        textAlign:'center'
-    },
-    footer_social:{
-        display:'flex',
-        listStyle:'none',
-        cursor:'pointer'
-    },
-    footer_social_item:{
-        margin:'0 .8rem'
-    },
+const useStyle=makeStyles(theme =>{
+    return{
+        footer_main:{
+            padding:'4rem 0',
+            background:`url(${footerBenner})`,
+            backgroundSize:'cover',
+            backgroundPosition:'center',
+            backgroundColor:'#424242',
+            backgroundBlendMode:'darken, luminosity',
+            color:'white',
+            [theme.breakpoints.down('sm')]:{
+                background:'#263238'
+            }
+        },
+        footer_categories_item:{
+            display:'block',
+            textAlign:'center',
+            color:'#bdbdbd',
+            transition:'.3s',
+            '&:hover':{
+                color:'#f44336',
+            }
+        },
+        footer_mail_phone:{
+            display:'flex',  
+            marginTop:'.8rem',
+            [theme.breakpoints.down('sm')]:{
+                justifyContent:'center'
+            }
+        },
+        footer_bottom:{
+            textAlign:'left',
+            [theme.breakpoints.down('sm')]:{
+                textAlign:'center'
+            }
+        },
+        footer_social:{
+            display:'flex',
+            listStyle:'none',
+            cursor:'pointer',
+            flexWrap:'wrap',
+            padding:0,
+            [theme.breakpoints.down('sm')]:{
+                justifyContent:'center'
+            }
+        },
+        footer_social_item:{
+            margin:'0 .8rem'
+        },
+    }
 })
 
 const Footer = () => {
@@ -53,35 +70,65 @@ const Footer = () => {
     return (
         <Box className={classes.footer_main} >
             <Container>
-                <Grid container spacing={2}>
-                    <Grid item xs={12} md={4}>
+                <Grid container spacing={{xs:4, sm:3, md:3}}>
+                    <Grid item xs={12} sm={4} sx={{textAlign:{xs:'center',sm:'left'}}}>
                         <Box sx={{mb:4}}>
-                            <Typography
+                            {/* <Typography
                                 variant="h4"
                                 noWrap
                                 component="div"
                             >
                                 POTTERY HOUSE
+                            </Typography> */}
+                            <img 
+                            src={brand}
+                            width='190px'
+                            alt="brand img" 
+                            />
+                            <Typography 
+                            variant='body2' 
+                            sx={{color:'#bdbdbd'}}
+                            >Pottery Made With Love
                             </Typography>
-                            <Typography variant='body2' sx={{color:'#bdbdbd'}}>Pottery Made With Love</Typography>
                         </Box>
                         <Box>
-                            <Typography variant='h6'>Contact us</Typography>
-                            <Typography variant='body2' sx={{color:'#bdbdbd'}}>Kochukhet 7/3, Dhaka</Typography>
+                            <Typography 
+                            variant='h6'
+                            >Contact us
+                            </Typography>
+                            <Typography 
+                            variant='body2' 
+                            sx={{color:'#bdbdbd'}}
+                            >Kochukhet 7/3, Dhaka
+                            </Typography>
                             <Box className={classes.footer_mail_phone}>
                                 <span>
-                                    <FiPhone size={24} color='#f44336'></FiPhone>
+                                    <FiPhone 
+                                    size={24} 
+                                    color='#f44336'
+                                    ></FiPhone>
                                 </span>
                                 <span>
-                                    <Typography variant='body1' sx={{color:'#bdbdbd',ml:2}}>+88 0191000000</Typography>
+                                    <Typography 
+                                    variant='body1' 
+                                    sx={{color:'#bdbdbd',ml:2}}
+                                    >+88 0191000000
+                                    </Typography>
                                 </span>
                             </Box>
                             <Box className={classes.footer_mail_phone}>
                                 <span>
-                                    <FiMail size={24} color='#f44336'></FiMail>
+                                    <FiMail 
+                                    size={24} 
+                                    color='#f44336'
+                                    ></FiMail>
                                 </span>
                                 <span>
-                                    <Typography variant='body1' sx={{color:'#bdbdbd',ml:2}}>potteryhouse@gmail.com</Typography>
+                                    <Typography 
+                                    variant='body1' 
+                                    sx={{color:'#bdbdbd',ml:2}}
+                                    >potteryhouse@gmail.com
+                                    </Typography>
                                 </span>
                             </Box>
                             <Box className={classes.footer_bottom}>
@@ -90,23 +137,39 @@ const Footer = () => {
                                         Follow us:
                                     </li>
                                     <li >
-                                        <BsFacebook size={26} style={{margin:'0 .3rem'}}> </BsFacebook>
+                                        <BsFacebook 
+                                        size={26} 
+                                        style={{margin:'0 .3rem'}}
+                                        > </BsFacebook>
                                     </li>
                                     <li >
-                                    <AiFillTwitterCircle size={30} style={{margin:'0 .3rem'}}></AiFillTwitterCircle>
+                                    <AiFillTwitterCircle 
+                                    size={30} 
+                                    style={{margin:'0 .3rem'}}
+                                    ></AiFillTwitterCircle>
                                     </li>
                                     <li >
-                                    <AiFillDribbbleCircle size={30} style={{margin:'0 .3rem'}}></AiFillDribbbleCircle>
+                                    <AiFillDribbbleCircle 
+                                    size={30} 
+                                    style={{margin:'0 .3rem'}}
+                                    ></AiFillDribbbleCircle>
                                     </li>
                                     <li >
-                                    <AiFillGithub size={30} style={{margin:'0 .3rem'}}></AiFillGithub>
+                                    <AiFillGithub 
+                                    size={30} 
+                                    style={{margin:'0 .3rem'}}
+                                    ></AiFillGithub>
                                     </li>
                                 </ul>
                             </Box>
                         </Box>
                     </Grid>
-                    <Grid item xs={12} md={4} sx={{textAlign:'center'}}>
-                        <Typography variant='h5' sx={{mb:4}}>Categories &#38; Support</Typography>
+                    <Grid item xs={12} sm={4} sx={{textAlign:'center'}}>
+                        <Typography 
+                        variant='h5' 
+                        sx={{mb:3}}
+                        >Categories &#38; Support
+                        </Typography>
                             <ListItem className={classes.footer_categories_item}>
                                 <Typography >Secure payment</Typography>
                             </ListItem>
@@ -123,15 +186,33 @@ const Footer = () => {
                                 <Typography>Help Center</Typography>
                             </ListItem>
                     </Grid>
-                    <Grid item xs={12} md={4} sx={{textAlign:'right'}}>
-                        <Typography variant='h5' sx={{mb:4}}>Latest updates</Typography>
+                    <Grid item xs={12} sm={4} sx={{textAlign:{xs:'center',sm:'right'}}}>
+                        <Typography 
+                        variant='h5' 
+                        sx={{mb:3}}
+                        >Latest updates
+                        </Typography>
                         <Box sx={{my:2}}>
-                            <Typography variant='subtitle1'>Against all odds see good results</Typography>
-                            <Typography variant="caption" sx={{color:'#bdbdbd'}}>November 05, 2021</Typography>
+                            <Typography 
+                            variant='subtitle1'
+                            >Against all odds see good results
+                            </Typography>
+                            <Typography 
+                            variant="caption" 
+                            sx={{color:'#bdbdbd'}}
+                            >November 05, 2021
+                            </Typography>
                         </Box>
                         <Box sx={{my:2}}>
-                            <Typography variant='subtitle1'>First tried and true dish line</Typography>
-                            <Typography variant="caption" sx={{color:'#bdbdbd'}}>November 01, 2021</Typography>
+                            <Typography 
+                            variant='subtitle1'
+                            >First tried and true dish line
+                            </Typography>
+                            <Typography 
+                            variant="caption" 
+                            sx={{color:'#bdbdbd'}}
+                            >November 01, 2021
+                            </Typography>
                         </Box>
                     </Grid>
                 </Grid> 

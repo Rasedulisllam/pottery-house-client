@@ -30,7 +30,7 @@ const PurchaseProduct = () => {
     
     // getting single product data depands on product id
     useEffect(()=>{
-        const url=`http://localhost:5000/products/${id}`
+        const url=`https://serene-brushlands-06959.herokuapp.com/products/${id}`
         axios.get(url)
             .then(res => {
                 setProduct(res.data)
@@ -43,7 +43,7 @@ const PurchaseProduct = () => {
         data.ProductImg=product.img;
         data.price=product.price;
         data.status='painding'
-        axios.post('http://localhost:5000/orderProducts',data)
+        axios.post('https://serene-brushlands-06959.herokuapp.com/orderProducts',data)
             .then(res =>{
                 if(res.data.insertedId){
                     alert('Order place successfully')

@@ -17,7 +17,7 @@ export default function ManageAllOrders() {
 
   // load All orders product data from data base
   React.useEffect(()=>{
-    const url=`http://localhost:5000/orderProducts`
+    const url=`https://serene-brushlands-06959.herokuapp.com/orderProducts`
     axios.get(url)
       .then(res => {
          setAllOrders(res.data)
@@ -29,7 +29,7 @@ export default function ManageAllOrders() {
   const handleCancel=(id)=>{
      const isCancel=window.confirm('Are you sure CANCEL this order')
      if(isCancel){
-          const url=`http://localhost:5000/orderProducts/${id}`
+          const url=`https://serene-brushlands-06959.herokuapp.com/orderProducts/${id}`
           axios.delete(url)
               .then(res => {
                 if(res.data.deletedCount>0){
@@ -43,7 +43,7 @@ export default function ManageAllOrders() {
 
     //  handle approved button
     const handleAproved=(id)=>{
-        const url=`http://localhost:5000/orderProducts/${id}`
+        const url=`https://serene-brushlands-06959.herokuapp.com/orderProducts/${id}`
         axios.put(url)
             .then(res => {
               if(res.data.modifiedCount>0){
@@ -62,8 +62,8 @@ export default function ManageAllOrders() {
 
 //   console.log(allOrders)
   return (
-    <TableContainer component={Paper} sx={{m:2, maxWidth:'98%'}}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+    <TableContainer component={Paper} sx={{ maxWidth:'98%'}}>
+      <Table aria-label="simple table">
         <TableHead>
           <TableRow>
             <TableCell>Product Image</TableCell>

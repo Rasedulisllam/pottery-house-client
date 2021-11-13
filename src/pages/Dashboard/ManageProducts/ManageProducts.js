@@ -10,16 +10,31 @@ import axios from 'axios';
 import { Button, Rating } from '@mui/material';
 import { Box } from '@mui/system';
 import { useHistory } from 'react-router';
+import { makeStyles } from '@mui/styles';
 
+
+const useStyle=makeStyles(theme =>{
+  return{
+    product_img:{
+      height:'96px',
+      width:'80px',
+      [theme.breakpoints.down('md')]:{
+        height:'46px',
+        width:'30px',
+      }
+    }
+  }
+})
 
 export default function ManageProducts({url}) {
     const [products,setProducts] =React.useState([])
     const history = useHistory()
+    const classes=useStyle()
 
 
  // getting all products data from database
     React.useEffect(()=>{
-        const url=`http://localhost:5000/products`
+        const url=`https://serene-brushlands-06959.herokuapp.com/products`
         axios.get(url)
             .then(res =>{
                 setProducts(res.data)
@@ -31,7 +46,7 @@ export default function ManageProducts({url}) {
     const handleDelete=(id)=>{
       const isCancel=window.confirm('Are you sure DELETE product ?')
       if(isCancel){
-            const url=`http://localhost:5000/products/${id}`
+            const url=`https://serene-brushlands-06959.herokuapp.com/products/${id}`
             axios.delete(url)
                 .then(res => {
                   if(res.data.deletedCount>0){
@@ -53,8 +68,8 @@ export default function ManageProducts({url}) {
 //   console.log(allOrders)
   return (
      <Box>
-          <TableContainer component={Paper} sx={{m:3, maxWidth:'80%'}}>
-            <Table sx={{ minWidth: 650 }} aria-label="simple table">
+          <TableContainer component={Paper} sx={{ maxWidth:{xs:'100%', lg:'80%'}}}>
+            <Table sx={{ minWidth: 450}} aria-label="simple table">
               <TableHead>
                 <TableRow>
                   <TableCell>Product Image</TableCell>
@@ -72,7 +87,7 @@ export default function ManageProducts({url}) {
                     sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                   >
                     <TableCell component="th" scope="row">
-                    <img src={row.img} height='90px' alt="" />
+                    <img src={row.img} className={classes.product_img}  alt="" />
                     </TableCell>
                     <TableCell align="left" sx={{fontWeight:'bold'}}>{row.name}</TableCell>
                     <TableCell align="left">{row.price} $</TableCell>

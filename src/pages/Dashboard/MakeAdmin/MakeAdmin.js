@@ -19,7 +19,7 @@ const MakeAdmin = () => {
         if(isEmail){
            const ismakeAdmin=window.confirm('Click OK for make a naw ADMIN')
            if(ismakeAdmin){
-               axios.put(`http://localhost:5000/users`,{ email })
+               axios.put(`https://serene-brushlands-06959.herokuapp.com/users`,{ email })
                         .then(res => {
                             if(res.data.modifiedCount>0){
                                 alert('Successfully make Admin')
@@ -38,7 +38,7 @@ const MakeAdmin = () => {
     }
 
     return (
-        <Box sx={{m:4, width:'40%'}}>
+        <Box sx={{margin:{xs:'1rem auto', sm:'1rem auto', md:'1rem'}, width:{xs:"95%", sm:'60%',md:'40%'}}}>
             <form onSubmit={handleMakeAdmin}>
                 <Typography 
                 variant='h4' 

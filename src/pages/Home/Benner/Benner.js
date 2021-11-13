@@ -5,26 +5,35 @@ import React from 'react';
 import { useHistory } from 'react-router';
 import bennerImg from '../../../images/benner/benner1.jpg'
 
-const useStyle=makeStyles({
-    benner_img:{
-        width:'100%', 
-        height:'550px',
-        backgroundImage:`url(${bennerImg})`,
-        backgroundPosition:'center',
-        backgroundSize:'cover',
-        backgroundAttachment:'fixed'
-    },
-    benner_text:{
-        display:'flex',
-        alignItems:'center',
-        height:'100%',
-    },
-    benner_text_h1:{
-        textTransform:'uppercase',
-        letterSpacing:'7px',
-        fontSize:'5rem',
-        fontWeight:'bold',
-        marginBottom:'.4rem'
+const useStyle=makeStyles(theme =>{
+    return{
+        benner_img:{
+            width:'100%', 
+            height:'550px',
+            backgroundImage:`url(${bennerImg})`,
+            backgroundPosition:'center',
+            backgroundSize:'cover',
+            backgroundAttachment:'fixed'
+        },
+        benner_text:{
+            display:'flex',
+            alignItems:'center',
+            height:'100%',
+        },
+        benner_text_h1:{
+            textTransform:'uppercase',
+            letterSpacing:'7px',
+            fontSize:'4.5rem',
+            fontWeight:'bold',
+            marginBottom:'.4rem',
+            [theme.breakpoints.down('md')]:{
+                fontSize:'3rem',
+                width:'75%'
+            },
+            [theme.breakpoints.down('sm')]:{
+                fontSize:'2.5rem'
+            },
+        }
     }
 })
 
@@ -45,7 +54,7 @@ const Benner = () => {
                         <Typography 
                         color='white' 
                         variant='h6' 
-                        sx={{fontStyle:'italic'}} 
+                        sx={{fontStyle:'italic',fontSize:{md:'1.5rem'},mb:'1rem'}} 
                         >We Make Things With Love</Typography>
                         <Typography 
                         variant='h1'

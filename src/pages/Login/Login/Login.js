@@ -6,24 +6,45 @@ import { useForm } from 'react-hook-form';
 import { Link,useLocation,useHistory } from 'react-router-dom';
 import loginImg from '../../../images/login/login1.jpg'
 import useAuth from '../../../hooks/useAuth'
+import { AiOutlineHome } from 'react-icons/ai';
 
-const useStyle=makeStyles({
-    login_main:{
-        background:`url(${loginImg})`,
-        backgroundSize:'cover',
-        backgroundPosition:'center',
-        backgroundAttachment:'fixed',
-        height:'120vh'
-    },
-    product_header:{
-        padding:'1.5rem 0',
-        backgroundColor:'#ffebee',
-        textTransform:'uppercase'
-    },
-    order_form:{
-        width:'70%',
-        marginTop:'3rem',
-        boxShadow:'1px 1px 10px #ddd'
+const useStyle=makeStyles(theme =>{
+    return {
+        login_main:{
+            background:`url(${loginImg})`,
+            backgroundSize:'cover',
+            backgroundPosition:'center',
+            backgroundAttachment:'fixed',
+            height:'120vh',
+            width:'100%',
+            overflow:'hidden',
+            [theme.breakpoints.down('md')]:{
+                background:'#ffcdd2',
+                height:'100vh',
+            }
+        },
+        product_header:{
+            padding:'1.5rem 0',
+            backgroundColor:'#ffebee',
+            textTransform:'uppercase'
+        },
+        order_form:{
+            width:'70%',
+            padding:'3rem',
+            backgroundColor:'#ffebee',
+            boxShadow:'1px 1px 10px #ddd',
+            [theme.breakpoints.down('md')]:{
+                background:'#ddd',
+                textAlign:'center',
+                width:'60%',
+            },
+            [theme.breakpoints.down('sm')]:{
+                background:'#ddd',
+                textAlign:'center',
+                width:'90%',
+                padding:'2rem',
+            },
+        }
     }
 })
 
@@ -45,19 +66,30 @@ const Login = () => {
   return (
     <Box className={classes.login_main}>
          <Box className={classes.product_header}>
-                <Container sx={{display:'flex', justifyContent:'space-between'}}>
-                    <Typography variant='h4' >
+                <Container sx={{display:'flex', justifyContent:'space-between',alignItems:'center'}}>
+                    <Typography variant='h6' sx={{fontSize:{sm:'2rem'}}} >
                     Login Now
                     </Typography>
-                    <Link  to='/home'>Go Home</Link>
+                    <Box>
+                        <button
+                        onClick={()=>history.push('/home')}
+                        className='my-btn-white' 
+                        style={{display:'block',margin:'1rem auto',fontWeight:'bold',color:'black'}}
+                        ><AiOutlineHome size={18}/> go home
+                        </button>
+                    </Box>
                 </Container>
             </Box>
-        <Container sx={{my:4}}>
+        <Container sx={{}}>
             <Grid container>
-                <Grid item md={6}></Grid>
-                <Grid item md={6}>
-                    <Box sx={{ml:3, p:6}} className={classes.order_form} >
-                        <Typography variant='h5' sx={{textTransform:'uppercase',mb:2}}>Login</Typography>
+                <Grid item xs={12} md={6}></Grid>
+                <Grid item xs={12} md={6} sx={{display:'flex',justifyContent:'center',alignItems:'center',height:'80vh'}}>
+                    <Box className={classes.order_form} >
+                        <Typography 
+                        variant='h5' 
+                        sx={{textTransform:'uppercase',mb:2}}
+                        >Login
+                        </Typography>
                         <form onSubmit={handleSubmit(onSubmit)}>
                         <Box sx={{my:2}}>
                             <TextField 

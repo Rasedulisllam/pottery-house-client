@@ -3,7 +3,6 @@ import AppBar from '@mui/material/AppBar';
 import Box from '@mui/material/Box';
 import Toolbar from '@mui/material/Toolbar';
 import IconButton from '@mui/material/IconButton';
-import Typography from '@mui/material/Typography';
 import MenuItem from '@mui/material/MenuItem';
 import Menu from '@mui/material/Menu';
 import MenuIcon from '@mui/icons-material/Menu';
@@ -11,6 +10,7 @@ import { Button, Container } from '@mui/material';
 import { useHistory } from 'react-router';
 import useAuth from '../../../hooks/useAuth';
 import { FiLogOut } from 'react-icons/fi';
+import brand from '../../../images/logo/logo1.png'
 
 
 
@@ -24,7 +24,13 @@ export default function Header() {
     setMobileMoreAnchorEl(null);
   };
 
-  const handleMenuClose = () => {
+  const handleMenuClose = (path) => {
+    if(path==='logout'){
+      logout()
+    }
+    else{
+      history.push(path)
+    }
     handleMobileMenuClose();
   };
 
@@ -54,38 +60,64 @@ export default function Header() {
       }}
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
+      sx={{minWidth:'400px'}}
     >
       <MenuItem
-        onClick={handleMenuClose}
+        onClick={()=>handleMenuClose('/home')}
       >
-        <Button>Home</Button>
+        <Button 
+        sx={{color:'black'}}
+         >Home</Button>
       </MenuItem>
       <MenuItem
-        onClick={handleMenuClose}
+        onClick={()=>handleMenuClose('/exploreProducts')}
       >
-        <Button>Home</Button>
+        <Button 
+        sx={{color:'black'}}
+        >All Products</Button>
       </MenuItem>
-      <MenuItem
-        onClick={handleMenuClose}
-      >
-        <Button>Home</Button>
-      </MenuItem>
+
+      {
+        user.email?(
+          <Box>
+            <MenuItem
+              onClick={()=>handleMenuClose('/dashboard')}
+            >
+              <Button 
+              sx={{color:'black'}}
+              >Dashboard</Button>
+            </MenuItem>
+            <MenuItem
+              onClick={()=>handleMenuClose('logout')}
+            >
+              <button 
+                className='my-btn-dark'
+              >logout</button>
+            </MenuItem>
+          </Box>
+        ):(
+          <MenuItem
+          onClick={()=>handleMenuClose('/login')}
+          >
+            <button 
+              className='my-btn-outline-dark'
+            >login</button>
+          </MenuItem>
+        )
+      }
     </Menu>
   );
 
   return (
     <Box sx={{ flexGrow: 1, position:'sticky' }} >
-      <AppBar position="sticky" color='' elevation={0} >
+      <AppBar position="sticky" color='' elevation={0} sx={{py:1}} >
         <Container sx={{px:0}}>
         <Toolbar>
-          <Typography
-            variant="h6"
-            noWrap
-            component="div"
-            sx={{ display: { sm: 'block' } }}
-          >
-            POTTERY HOUSE
-          </Typography>
+          <img 
+          src={brand}
+          width='190px'
+          alt="brand img" 
+          />
 
           <Box sx={{ display: { xs: 'none', md: 'flex' },ml:4 }}>
             <Button 

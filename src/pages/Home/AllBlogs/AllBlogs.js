@@ -27,7 +27,7 @@ const Blogs = () => {
 
     // getting some products data from database
     useEffect(()=>{
-        const url=`http://localhost:5000/blogs`
+        const url=`https://serene-brushlands-06959.herokuapp.com/blogs`
         axios.get(url)
             .then(res =>{
                 setBlogs(res.data)

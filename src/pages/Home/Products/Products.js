@@ -11,7 +11,7 @@ const Products = () => {
 
     // getting some products data from database
     useEffect(()=>{
-        const url=`http://localhost:5000/products?count=6`
+        const url=`https://serene-brushlands-06959.herokuapp.com/products?count=6`
         axios.get(url)
             .then(res =>{
                 setProducts(res.data)
@@ -23,13 +23,28 @@ const Products = () => {
     return (
         <Container sx={{my:6}}>
             <Box sx={{textAlign:'center', mb:8}}>
-                <Typography variant='body1' sx={{fontStyle:'italic'}}>Latest products</Typography>
-                <Typography variant='h3' sx={{ textTransform:'uppercase'}}>Perfect decor prices for daily life</Typography>
+                <Typography 
+                variant='body1' 
+                sx={{fontStyle:'italic',mb:1}}
+                >Latest products
+                </Typography>
+
+                <Typography 
+                variant='h3' 
+                sx={{ textTransform:'uppercase', fontSize:{xs:'1.4rem',sm:'1.5rem',md:'2.5rem'}}}
+                >Perfect decor prices for daily life
+                </Typography>
             </Box>
             <Box>
-                <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+                <Grid 
+                container 
+                spacing={{ xs: 4, sm:4, md: 3 }} 
+                columns={{ xs: 4, sm: 8, md: 12 }}>
                     {
-                        products.map(product => <Product key={product._id} product={product}></Product>)
+                        products.map(product => <Product
+                            key={product._id} 
+                            product={product}
+                            ></Product>)
                     }
                 </Grid>
             </Box>
@@ -37,7 +52,8 @@ const Products = () => {
             onClick={()=> history.push('/exploreProducts')}
             className='my-btn-outline-dark' 
             style={{my:3, margin:'2rem auto', display:'block',}}
-            >Explore all Products</button>
+            >Explore all Products
+            </button>
         </Container>
     );
 };

@@ -1,5 +1,5 @@
-.App {
-  /* text-align: center; */
+.App{
+  width:100%;
 }
 
 .my-btn-outline-dark{
@@ -8,7 +8,7 @@
   letter-spacing: 1px;
   transition:.3s;
   color:black;
-  padding:1rem 2rem;
+  padding:.9rem 1.5rem;
   text-transform: uppercase;
   font-weight: 600;
   cursor:pointer;
@@ -26,7 +26,7 @@
   letter-spacing: 1px;
   transition:.3s;
   color:white;
-  padding:1rem 2rem;
+  padding:.9rem 1.5rem;
   text-transform: uppercase;
   font-weight: 600;
   cursor:pointer;
@@ -44,7 +44,7 @@
   letter-spacing: 1px;
   transition:.3s;
   color:black;
-  padding:1rem 2rem;
+  padding:.9rem 1.5rem;
   text-transform: uppercase;
   font-weight: 600;
   cursor:pointer;
@@ -73,3 +73,38 @@
   color:rgb(255, 255, 255);
 }
 
+
+/* responsive button */
+@media only screen and (max-width: 600px) {
+  .my-btn-outline-dark{
+    letter-spacing:0;
+    padding:.8rem 1rem;
+  }
+  .my-btn-light{
+    letter-spacing:0;
+    padding:.8rem 1rem;
+  }
+  .my-btn-dark{
+    letter-spacing:0;
+    padding:.8rem 1rem;
+  }
+  .my-btn-white{
+    letter-spacing:0;
+    padding:.8rem 1rem;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  .my-btn-outline-dark{
+    padding:.7rem .8rem;
+  }
+  .my-btn-light{
+    padding:.7rem .8rem;
+  }
+  .my-btn-dark{
+    padding:.7rem .8rem;
+  }
+  .my-btn-white{
+    padding:.7rem .8rem;
+  }
+}
