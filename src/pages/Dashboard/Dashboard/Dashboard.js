@@ -256,9 +256,6 @@ function Dashboards(props) {
       >
         <Toolbar />
             <Switch>
-                <Route exact path={path}>
-                    <MyOrders></MyOrders>
-                </Route>
                 <Route path={`${path}/myOrder`}>
                     <MyOrders></MyOrders>
                 </Route>

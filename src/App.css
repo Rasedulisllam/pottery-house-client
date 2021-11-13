@@ -39,7 +39,7 @@
 }
 
 .my-btn-white{
-  border:1px solid transparent;
+  border:1px solid white;
   background-color: rgba(255, 255, 255, 0.904);
   letter-spacing: 1px;
   transition:.3s;
@@ -51,12 +51,12 @@
   box-shadow: 1px 1px 20px rgba(255, 254, 254, 0.198);
 }
 .my-btn-white:hover{
-  box-shadow: 1px 1px 20px rgba(255, 255, 255, 0.452);
-  background-color: white;
-  color:black;
+  box-shadow: 1px 1px 20px rgba(255, 255, 255, 0.472);
+  background-color: transparent;
+  color:white;
 }
 .my-btn-dark{
-  border:1px solid transparent;
+  border:1px solid black;
   background-color: rgba(0, 0, 0, 0.904);
   letter-spacing: 1px;
   transition:.3s;
@@ -69,8 +69,8 @@
 }
 .my-btn-dark:hover{
   box-shadow: 1px 1px 20px rgba(5, 5, 5, 0.322);
-  background-color: rgb(2, 2, 2);
-  color:rgb(255, 255, 255);
+  background-color: transparent;
+  color:black;
 }
 
 

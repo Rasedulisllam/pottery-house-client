@@ -12,8 +12,6 @@ import useAuth from '../../../hooks/useAuth';
 import { FiLogOut } from 'react-icons/fi';
 import brand from '../../../images/logo/logo1.png'
 
-
-
 export default function Header() {
   const {user,logout}=useAuth()
   const history = useHistory();
